@@ -1,0 +1,36 @@
+<configuration>
+<appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <!--See also http://logback.qos.ch/manual/appenders.html#RollingFileAppender-->
+    <File>\home\ubuntu\logs\msmgym-info.log</File>
+    <encoder>
+        <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n</pattern>
+    </encoder>
+    <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+        <maxIndex>10</maxIndex>
+        <FileNamePattern>\home\ubuntu\logs\msmgym-info.log.%i</FileNamePattern>
+    </rollingPolicy>
+    <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+        <MaxFileSize>10MB</MaxFileSize>
+    </triggeringPolicy>
+</appender>
+<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+    <Target>System.out</Target>
+    <encoder>
+        <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n</pattern>
+    </encoder>
+</appender>
+<appender name="DEBUG-FILE" class="ch.qos.logback.core.FileAppender">
+    <file>\home\ubuntu\logs\msmgym-debug.log</file>
+    <append>true</append>
+    <encoder>
+        <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n</pattern>
+    </encoder>
+</appender>
+<logger name="debugLogs" level="DEBUG" additivity="false">
+    <appender-ref ref="DEBUG-FILE"/>
+</logger>
+<root level="INFO">
+    <appender-ref ref="file"/>
+    <appender-ref ref="stdout"/>
+</root>
+</configuration>
